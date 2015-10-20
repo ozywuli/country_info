@@ -7,10 +7,9 @@ var map = L.mapbox.map('map', 'mapbox.streets')
 
 $.getJSON('assets/data/countries.geo.json', function(data) {
 
-
+  console.log(map);
   var myLayer = L.mapbox.featureLayer().addTo(map);
   myLayer.setGeoJSON(data);
-  var geoJSON = data;
 
   myLayer.eachLayer(function(layer) {
     layer.on('click', function(e) {
@@ -26,13 +25,13 @@ $.getJSON('assets/data/countries.geo.json', function(data) {
 $(function() {
 
   $.ajax({
-    url: 'https://restcountries-v1.p.mashape.com/all',
+    url: 'https://restcountries-v1.p.mashape.com/name/mexico',
     type: 'GET',
     data: {},
     datatype: 'json',
     success: function(data) {
-      console.log(data.length);
-      console.log(data[0].name);
+      console.log(data);
+      console.log(data[0].capital);
     }, // end success
     error: function(err) {
       console.log(err);
