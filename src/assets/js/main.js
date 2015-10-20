@@ -26,12 +26,12 @@ $.getJSON('assets/data/countries.geo.json', function(data) {
 $(function() {
 
   $.ajax({
-    url: 'https://restcountries-v1.p.mashape.com/name/mexico',
+    url: 'https://restcountries-v1.p.mashape.com/all',
     type: 'GET',
     data: {},
     datatype: 'json',
     success: function(data) {
-      console.log(data);
+      console.log(data.length);
       console.log(data[0].name);
     }, // end success
     error: function(err) {
