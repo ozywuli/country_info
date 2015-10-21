@@ -20,8 +20,6 @@ var Panels = React.createClass({
 
         var countries = countries;
 
-        // console.log(countries);
-
         if (this.isMounted()) {
           this.setState({
             countries: countries
@@ -105,15 +103,23 @@ var Map = React.createClass({
       myLayer.eachLayer(function(layer) {
         layer.on('click', function(e) {
           
-          var id = $(this)[0].feature.properties.name.toLowerCase().replace(/ /g, '').slice(0, 15);
-          console.log( $('[itemid='+id+']') );
+          var id = $(this)[0].feature.properties.name.toLowerCase().replace(/ /g, '').slice(0, 12);
+          console.log( $('[itemid*='+id+']') );
+
+
+
 
           $('.panels__item').removeClass('panels__item--active');
-          $('[itemid='+id+']').addClass('panels__item--active');
+          $('[itemid*='+id+']').addClass('panels__item--active');
+
+/*          $('.panels__item').each(function() {
+            console.log($(this).attr('itemid'))
+          })*/
+
         })
       })
 
-    }.bind(this));
+    });
 
 
 
