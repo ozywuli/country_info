@@ -111,8 +111,12 @@ var Map = React.createClass({
           var id = $(this)[0].feature.properties.name.toLowerCase().replace(/ /g, '').slice(0, 12);
           console.log( $('[itemid*='+id+']') );
 
+          $('.instructions').fadeOut();
+
           $('.panels__item').removeClass('panels__item--active');
           $('[itemid*='+id+']').addClass('panels__item--active');
+
+          console.log($(this));
 
 
         })
