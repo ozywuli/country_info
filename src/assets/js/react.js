@@ -1,3 +1,7 @@
+(function() {
+
+module.exports = function() {
+
 /*
  * Panels
  */
@@ -168,8 +172,9 @@ React.render(
 
 
 
+}
 
-
+})()
 
 
 
