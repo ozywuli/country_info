@@ -83,7 +83,7 @@ var Map = React.createClass({
 
 
   createMap: function(element) {
-    var map = L.mapbox.map(element, 'mapbox.streets');
+    var map = L.mapbox.map(element, 'mapbox.streets', { zoomControl: false });
     return map;
   },
 
@@ -96,6 +96,7 @@ var Map = React.createClass({
   createLayers: function() {
 
     var myLayer = L.mapbox.featureLayer().addTo(this.map);
+    new L.Control.Zoom({position: 'topright' }).addTo(this.map);
 
     $.getJSON('assets/data/countries.geo.json', function(data) {
       myLayer.setGeoJSON(data);
@@ -106,19 +107,15 @@ var Map = React.createClass({
           var id = $(this)[0].feature.properties.name.toLowerCase().replace(/ /g, '').slice(0, 12);
           console.log( $('[itemid*='+id+']') );
 
-
-
-
           $('.panels__item').removeClass('panels__item--active');
           $('[itemid*='+id+']').addClass('panels__item--active');
 
-/*          $('.panels__item').each(function() {
-            console.log($(this).attr('itemid'))
-          })*/
 
         })
       })
 
+    }).done(function() {
+      $('.preloader').fadeOut(1000);
     });
 
 
@@ -166,7 +163,7 @@ var Container = React.createClass({
 
 React.render(
   <Container />,
-  document.getElementsByTagName('BODY')[0]
+  document.getElementById('mount')
 )
 
 
