@@ -1,4 +1,8 @@
+@import 'reset';
+@import 'normalize';
+@import 'helper';
 @import 'settings';
+@import 'mixins';
 @import 'base';
 
 .preloader {
@@ -22,6 +26,7 @@
 
 
 .instructions {
+  display: none;
   position: fixed;
   top: 20px;
   left: 20px;
@@ -29,11 +34,17 @@
   padding: 20px;
   color: #FFF;
   z-index: 50;
+  p {
+    position: relative;
+    z-index: 25;
+  }
 }
 
 #mount {
+  position: relative;
   width: 100%;
   height: 100%;
+  z-index: 10;
 }
 
 .container {
@@ -65,15 +76,60 @@
 .panels {
 
 }
-  .panels__item {
-    position: absolute;
-    top: 0;
-    max-width: 450px;
-    background: #FFF;
-    padding: 20px;
-    opacity: 0;
-    visibility: hidden;
+  .panels__container {
+
   }
+  .panels__item {
+    display: none;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    max-width: 300px;
+    background: #FFF;
+    margin-bottom: 20px;
+    border-radius: 3px;
+    padding: 20px;
+    word-wrap: break-word;
+
+    h2 {
+      display: block;
+      margin-bottom: 20px;
+      font-size: 3.6rem;
+      font-weight: bold;
+    }
+    ul li {
+      margin-bottom: 10px;
+    }
+    span {
+      margin-right: 5px;
+      margin-bottom: 5px;
+      display: inline-block;
+      &:after {
+        content: ',';
+      }
+    }
+    span:last-of-type {
+      &:after {
+        content: '';
+      }
+    }
+  }
+    .panels__object--noc {
+      span {
+        &:after {
+          content: '';
+        }
+      }
+    }
+    .panels__property {
+      display: inline-block;
+      margin-bottom: 5px;
+      font-weight: bold;
+      .panels__item &:after {
+        content: ':';
+      }
+    }
+
   .panels__item--active {
     opacity: 1;
     visibility: visible;

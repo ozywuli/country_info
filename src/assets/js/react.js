@@ -38,7 +38,10 @@ var Panels = React.createClass({
         xhr.setRequestHeader("X-Mashape-Authorization", "J10aBMA4cAmshoCjGohz6QX42UMlp1du2X9jsnZRUQa0QLICnc");
       } // end beforeSend
 
-    }) // end ajax
+    }).done(function() {
+      $('.preloader').fadeOut(1000);
+      $('.instructions').fadeIn();
+    }); // end ajax
   },
 
 
@@ -53,9 +56,32 @@ var Panels = React.createClass({
               <li className="panels__item" itemID={country.name.toLowerCase().replace(/ /g, '')}>
                 <h2>{country.name}</h2>
                 <ul>
-                  <li>Capital <span>{country.capital}</span></li>
-                  <li>Alternative Spellings: {country.altSpellings}</li>
-                  <li>{country.region}</li>
+                  <li>
+                    <span className="panels__property">Capital</span>
+                    <span>{country.capital}</span>
+                  </li>
+                  <li><span className="panels__property">Alternative Spellings</span>{country.altSpellings}</li>
+                  <li><span className="panels__property">Relevance</span>{country.relevance}</li>
+                  <li><span className="panels__property">Region</span>{country.region}</li>
+                  <li><span className="panels__property">Subregion</span>{country.subregion}</li>
+                  <li className="panels__object--noc"><span className="panels__property">Translations</span>
+
+{Object.keys(country.translations).map(function(key) {
+    return <div>{key}: {country.translations[key]}</div>;
+})}
+                  </li>
+                  <li><span className="panels__property">Population</span>{country.population}</li>
+                  <li className="panels__object--noc"><span className="panels__property">Latitude, Longitude</span>[{country.latlng[0]}, {country.latlng[1]}]</li>
+                  <li><span className="panels__property">Demonym</span>{country.demonym}</li>
+                  <li><span className="panels__property">Area</span>{country.area}</li>
+                  <li><span className="panels__property">Gini</span>{country.gini}</li>
+                  <li><span className="panels__property">Timezones</span>{country.timezones}</li>
+                  <li><span className="panels__property">Borders</span>{country.borders}</li>
+                  <li><span className="panels__property">Native Name</span>{country.nativeName}</li>
+                  <li><span className="panels__property">Calling Codes</span>{country.callingCodes}</li>
+                  <li><span className="panels__property">Top Level Domain</span>{country.topLevelDomain}</li>
+                  <li><span className="panels__property">Currencies</span>{country.currencies}</li>
+                  <li><span className="panels__property">Languages</span>{country.languages}</li>
                 </ul>
               </li>
             )
@@ -113,18 +139,13 @@ var Map = React.createClass({
 
           $('.instructions').fadeOut();
 
-          $('.panels__item').removeClass('panels__item--active');
-          $('[itemid*='+id+']').addClass('panels__item--active');
-
-          console.log($(this));
-
+          $('.panels__item').css('display', 'none');
+          $('[itemid*='+id+']').css('display', 'block');
 
         })
       })
 
-    }).done(function() {
-      $('.preloader').fadeOut(1000);
-    });
+    })
 
 
 
@@ -161,7 +182,7 @@ var Container = React.createClass({
   render: function() {
     return (
       <div className="container">
-        <Map lat="0" lon="0" zoom="2"/>
+        <Map lat="0" lon="0" zoom="3"/>
         <Panels />
       </div>
     )
