@@ -2,6 +2,12 @@
 
 module.exports = function() {
 
+
+
+
+
+
+
 /*
  * Panels
  */
@@ -41,6 +47,21 @@ var Panels = React.createClass({
     }).done(function() {
       $('.preloader').fadeOut(1000);
       $('.instructions').fadeIn();
+
+      $('.panels__close').on('click', function(e) {
+        e.preventDefault();
+        $('.panels').css('visibility', 'hidden');
+
+        $('.panels__item').css('display', 'none');
+        $(this).css('display', 'none');
+
+      })
+
+
+      $('li[itemid="britishindianoceanterritory"]').remove();
+      $('li[itemid="unitedstatesminoroutlyingislands"]').remove();
+
+
     }); // end ajax
   },
 
@@ -48,6 +69,9 @@ var Panels = React.createClass({
   render: function() {
     return (
       <div className="panels">
+        <a href="#" className="panels__close">
+          <img src="assets/img/close.png" />
+        </a>
         <ul className="panels__container">
         {
           this.state.countries.map(function(country) {
@@ -65,10 +89,9 @@ var Panels = React.createClass({
                   <li><span className="panels__property">Region</span>{country.region}</li>
                   <li><span className="panels__property">Subregion</span>{country.subregion}</li>
                   <li className="panels__object--noc"><span className="panels__property">Translations</span>
-
-{Object.keys(country.translations).map(function(key) {
-    return <div>{key}: {country.translations[key]}</div>;
-})}
+                    {Object.keys(country.translations).map(function(key) {
+                        return <div className="translations">{key}:{country.translations[key]}</div>;
+                    })}
                   </li>
                   <li><span className="panels__property">Population</span>{country.population}</li>
                   <li className="panels__object--noc"><span className="panels__property">Latitude, Longitude</span>[{country.latlng[0]}, {country.latlng[1]}]</li>
@@ -114,6 +137,7 @@ var Map = React.createClass({
 
   createMap: function(element) {
     var map = L.mapbox.map(element, 'mapbox.streets', { zoomControl: false });
+    map.scrollWheelZoom.disable();
     return map;
   },
 
@@ -139,8 +163,12 @@ var Map = React.createClass({
 
           $('.instructions').fadeOut();
 
+          $('.panels').css('visibility', 'visible');
           $('.panels__item').css('display', 'none');
           $('[itemid*='+id+']').css('display', 'block');
+
+
+          $('.panels__close').css('display', 'block');
 
         })
       })
@@ -197,9 +225,15 @@ React.render(
 
 
 
-}
 
-})()
+
+
+} // end module export
+
+
+
+
+})() // end anonymous wrapper
 
 
 
