@@ -30,7 +30,7 @@ function handleErrors() {
 
 
 function compileHTML() {
-  return gulp.src('./src/index.html')
+  return gulp.src('./src/*.html')
     .pipe(gulp.dest('./build/'));
 }
 function compileCSS() {
@@ -95,7 +95,7 @@ function buildScript(file, watch) {
 
 
 function watchHTML(error) {
-  gulp.watch(['./src/index.html'], ['html']);
+  gulp.watch(['./src/*.html'], ['html']);
 }
 function watchCSS(error) {
   gulp.watch(['./src/assets/scss/*.scss', './src/assets/scss/**/*.scss'], ['html']);

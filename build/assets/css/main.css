@@ -768,7 +768,6 @@ body:before {
 .panels__item {
 	display: none;
 	width: 100%;
-	min-height: 100%;
 	background: #FFF;
 	margin-bottom: 20px;
 	border-radius: 3px;
